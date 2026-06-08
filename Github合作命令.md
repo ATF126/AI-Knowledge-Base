@@ -1,285 +1,131 @@
 # GitHub 协作完整流程指南
 
-本文档提供从项目仓库下载资料到协作更新的完整命令流程。
+本文档提供从 fork 仓库、同步上游、更新内容，到提交 Pull Request 的完整命令流程。适合第一次参与协作的同学按步骤执行。
 
----
+## 1. Fork 仓库
 
-## 一、基础准备
+原仓库：https://github.com/bucky1119/AI-Knowledge-Base.git
 
-### 1.1 克隆项目（首次操作）
+先到原仓库页面点击 Fork，把项目复制到自己的 GitHub 账号下。后续所有修改都在自己的 Fork 仓库中完成。
 
-```bash
-# 克隆远程仓库到本地
-git clone https://github.com/bucky1119/AI-Knowledge-Base.git
+## 2. 克隆到本地
 
-# 进入项目目录
-cd AI-Knowledge-Base
-```
+把自己的 Fork 仓库克隆到本地电脑：
 
-### 1.2 配置 Git 用户信息
+	git clone https://github.com/你的账号/仓库名.git
+	cd 仓库名
 
-```bash
-# 设置用户名和邮箱（只需配置一次）
-git config --global user.name "你的GitHub用户名"
-git config --global user.email "你的邮箱"
-```
+如果仓库已经存在本地，也可以直接进入目录。
 
----
+## 3. 配置上游仓库
 
-## 二、日常协作流程
+为了后续同步原仓库的最新内容，给本地仓库添加 upstream 远程地址：
 
-### 2.1 同步最新代码
+	git remote add upstream https://github.com/bucky1119/AI-Knowledge-Base.git
+	git remote -v
 
-```bash
-# 确保在主分支
-git checkout main
+执行后可以看到 origin 和 upstream 两个远程地址。
 
-# 拉取最新代码
-git fetch origin
-git pull origin main
-```
+## 4. 新建分支
 
-### 2.2 创建工作分支
+可以直接在main主分支修改，也可以创建新分支进行管理。
 
-```bash
-# 创建新分支进行开发
-git checkout -b feature/你的功能名称
+	git checkout -b feature/你的功能名
 
-# 或基于最新main创建
-git checkout -b feature/你的功能名称 origin/main
-```
+分支名建议清晰直接，例如：
 
-### 2.3 查看和添加文件
+	docs/add-contribution-guide
 
-```bash
-# 查看当前状态
-git status
+## 5. 更新内容
 
-# 添加单个文件
-git add 文件名
+在分支里修改文件、补充内容或修复问题。完成后先查看变更：
 
-# 添加所有文件
-git add .
+	git status
+	git diff
 
-# 添加特定类型的文件
-git add *.md        # 只添加markdown文件
-git add src/       # 添加src目录下的文件
-```
+确认没有误改文件后，再把修改加入暂存区：
 
-### 2.4 提交更改
+	git add .
 
-```bash
-# 提交并添加描述信息
-git commit -m "提交描述：做了什么修改"
+如果只想提交某个文件，也可以单独指定文件名。
 
-# 修改最后一次提交（如果描述写错了）
-git commit --amend -m "正确的描述"
-```
+## 6. 提交本地版本
 
-### 2.5 推送分支
+使用清晰的提交信息记录这次改动：
 
-```bash
-# 首次推送（关联本地分支和远程分支）
-git push -u origin feature/你的功能名称
+	git commit -m "docs: update GitHub collaboration guide"
 
-# 后续推送
-git push origin feature/你的功能名称
-```
+建议提交信息简短、具体，最好说明这次修改的目的。
 
----
+## 7. 同步上游最新内容
 
-## 三、发起协作请求（Pull Request）
+如果原仓库已经有更新，先拉取 upstream 的最新内容，再合并到自己的分支，减少冲突：
 
-### 3.1 创建 PR 的完整流程
+	git fetch upstream
+	git merge upstream/main
 
-```bash
-# 1. 确保代码已提交
-git status
 
-# 2. 推送分支到远程
-git push -u origin feature/你的功能名称
+如果合并时出现冲突，先手动解决冲突，再执行：
 
-# 3. 在浏览器中创建 Pull Request
-# 访问: https://github.com/bucky1119/AI-Knowledge-Base/pull/new/feature/你的功能名称
-```
+	git add .
+	git commit
 
-### 3.2 同步远程更新
+## 8. 推送到自己的 Fork
 
-```bash
-# 获取远程分支列表
-git fetch origin
+把本地分支推送到自己的 GitHub 仓库：
 
-# 查看所有分支
-git branch -a
+	git push origin feature/你的功能名
 
-# 切换到远程分支
-git checkout -b 本地分支名 origin/远程分支名
-```
+第一次推送时，可能需要加上 upstream 追踪分支：
 
----
+	git push -u origin feature/你的功能名
 
-## 四、常用辅助命令
+## 9. 发起 Pull Request
 
-### 4.1 分支管理
+推送完成后，打开自己 Fork 仓库的 GitHub 页面，点击 Compare & pull request，填写 PR 内容并提交。
 
-```bash
-# 查看分支
-git branch              # 本地分支
-git branch -r           # 远程分支
-git branch -a            # 所有分支
+PR 描述建议包含这些信息：
 
-# 删除本地分支
-git branch -d 分支名
+- 这次修改了什么
+- 为什么要改
+- 是否有测试或截图
+- 有没有需要特别注意的地方
 
-# 删除远程分支
-git push origin --delete 分支名
-```
+## 10. 处理评审意见
 
-### 4.2 查看历史
+如果维护者提出修改意见，继续在同一个分支上更新代码，然后再次提交并推送：
 
-```bash
-# 查看提交历史
-git log
+	git add .
+	git commit -m "fix: address review comments"
+	git push
 
-# 查看简略历史
-git log --oneline
+PR 会自动更新，不需要重新新建一个。
 
-# 查看某个文件的修改历史
-git log 文件名
+## 11. 协作流程总览
 
-# 查看具体某次提交的内容
-git show 提交ID
-```
+完整流程可以记成下面这条链路：
 
-### 4.3 撤销操作
+	Fork 仓库 -> 克隆本地 -> 添加 upstream -> 新建分支 -> 修改内容 -> 提交 commit -> 推送到 origin -> 创建 PR -> 根据反馈继续修改
 
-```bash
-# 撤销未暂存的修改
-git checkout -- 文件名
+## 常见注意事项
 
-# 撤销已暂存但未提交的内容
-git reset HEAD 文件名
+- 每个 PR 尽量只做一类事情，方便审查。
+- 提交前先看 git diff，避免把无关文件一起提交。
+- 如果你长期协作，记得定期同步 upstream，减少冲突。
 
-# 撤销最后一次提交（保留修改）
-git reset --soft HEAD~1
+## 示例流程
 
-# 完全撤销最后一次提交（不保留修改）
-git reset --hard HEAD~1
-```
+下面是一套最常见的完整操作示例：
 
-### 4.4 暂存工作
+	git clone https://github.com/你的账号/仓库名.git
+	cd 仓库名
+	git remote add upstream https://github.com/bucky1119/AI-Knowledge-Base.git
+	git checkout -b feature/update-docs
+	# 编辑文件
+	git status
+	git add .
+	git commit -m "docs: improve collaboration guide"
+	git push -u origin feature/update-docs
 
-```bash
-# 暂存当前工作
-git stash
+然后到 GitHub 页面创建 Pull Request 即可。
 
-# 查看暂存列表
-git stash list
-
-# 恢复暂存的内容
-git stash pop
-
-# 删除暂存
-git stash drop
-```
-
----
-
-## 五、协作最佳实践
-
-### 5.1 每日工作流程
-
-```bash
-# 每天开始工作时
-git checkout main
-git pull origin main
-
-# 创建新功能分支
-git checkout -b feature/今日任务
-
-# ... 进行开发工作 ...
-
-# 提交并推送
-git add .
-git commit -m "完成XX��能"
-git push -u origin feature/今日任务
-```
-
-### 5.2 分支命名规范
-
-- `feature/功能名称` - 新功能开发
-- `fix/问题描述` - Bug修复
-- `docs/文档更新` - 文档更新
-- `refactor/重构描述` - 代码重构
-
-### 5.3 提交信息规范
-
-```
-feat: 添加新功能
-fix: 修复问题
-docs: 文档更新
-style: 格式调整
-refactor: 重构
-test: 测试
-```
-
----
-
-## 六、常见问题解决
-
-### 6.1 冲突解决
-
-```bash
-# 拉取时发生冲突
-git pull origin main
-
-# 手动解决冲突后
-git add 解决冲突的文件
-git commit -m "解决冲突"
-git push
-```
-
-### 6.2 合并其他分支的修改
-
-```bash
-# 切换到要合并的分支
-git checkout main
-
-# 合并其他分支
-git merge feature/其他分支
-
-# 如果有冲突，手动解决后提交
-```
-
-### 6.3 更新fork的仓库
-
-```bash
-# 添加上游仓库
-git remote add upstream https://github.com/bucky1119/AI-Knowledge-Base.git
-
-# 获取上游更新
-git fetch upstream
-
-# 合并到主分支
-git checkout main
-git merge upstream/main
-```
-
----
-
-## 七、快速命令汇总
-
-```bash
-# 一键开始新任务
-git checkout main && git pull origin main && git checkout -b feature/新任务
-
-# 一键提交推送
-git add . && git commit -m "描述" && git push -u origin feature/当前分支
-
-# 查看当前状态
-git status && git log --oneline -5
-```
-
----
-
-> 📝 **提示**: 建议在进行重要操作前先查看 `git status` 确认当前状态，避免误操作。
