@@ -1,0 +1,48 @@
+Windows PowerShell
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+尝试新的跨平台 PowerShell https://aka.ms/pscore6
+
+PS C:\Users\1> cd D:\llm-workspace\AI-share\github\
+PS D:\llm-workspace\AI-share\github> git clone https://github.com/Ikaros-sc/AI-Knowledge-Base.git
+Cloning into 'AI-Knowledge-Base'...
+remote: Enumerating objects: 150, done.
+remote: Counting objects: 100% (92/92), done.
+remote: Compressing objects: 100% (86/86), done.
+remote: Total 150 (delta 11), reused 84 (delta 5), pack-reused 58 (from 1)
+Receiving objects: 100% (150/150), 51.47 MiB | 11.12 MiB/s, done.
+Resolving deltas: 100% (24/24), done.
+PS D:\llm-workspace\AI-share\github> cd .\AI-Knowledge-Base\
+PS D:\llm-workspace\AI-share\github\AI-Knowledge-Base> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        reports/2026-06-24-Loop-Engineering/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+直接在文件夹中做改动（比如添加文件），改动完之后进行下一步
+
+PS D:\llm-workspace\AI-share\github\AI-Knowledge-Base> git add .
+warning: in the working copy of 'reports/2026-06-24-Loop-Engineering/Loop Engineering.md', LF will be replaced by CRLF the next time Git touches it
+PS D:\llm-workspace\AI-share\github\AI-Knowledge-Base> git commit -m "Add files 2026-06-24-Loop-Engineering"
+[main 0c95e90] Add files 2026-06-24-Loop-Engineering
+ 1 file changed, 227 insertions(+)
+ create mode 100644 reports/2026-06-24-Loop-Engineering/Loop Engineering.md
+
+需要token
+
+PS D:\llm-workspace\AI-share\github\AI-Knowledge-Base> git push origin main
+info: please complete authentication in your browser...
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 4.83 KiB | 4.83 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Ikaros-sc/AI-Knowledge-Base.git
+   2244db1..0c95e90  main -> main
+PS D:\llm-workspace\AI-share\github\AI-Knowledge-Base>

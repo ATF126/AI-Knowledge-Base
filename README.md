@@ -14,3 +14,5 @@
 | 2025-05-18 | Week 2 | 第2组 | 张潇、王媛 | Andrej Karpathy Skills | [查看报告](./reports/2026-05-18-Andrej%20Karpathy%20Skills/) |
 | 2025-05-25 | Week 3 | 第3组 | 沈成、李树堉 | Writing Polish Skill 分享 + MCP 分享 | [查看报告](./reports/2026-05-25-writing-polish-Skill分享和MCP分享/) |
 | 2025-06-01 | Week 4 | 第4组 | 李朝鹏、赵文杰 | DeerFlow 2.0 | [查看报告](./reports/2026-06-01-DeerFlow2.0/) |
+| 2025-06-08 | Week 1 | 第1组 | 陈思光、万阳 | llm-wiki分享 + pi-coding-agent分享 | [查看报告1](./reports/2026-06-08-llm-wiki/) [查看报告2](./reports/2026-06-08-pi-coding-agent/) |
+| 2025-06-24 | Week 3 | 第3组 | 沈成、李树堉 | Loop + MCP 分享 | [查看报告](./reports/2026-05-25-writing-polish-Skill分享和MCP分享/) |

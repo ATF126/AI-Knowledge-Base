@@ -2,6 +2,8 @@
 
 本文档提供从 fork 仓库、同步上游、更新内容，到提交 Pull Request 的完整命令流程。适合第一次参与协作的同学按步骤执行。
 
+具体案例可以查看沈成同学提供的[案例](./GitHub合作案例/github-fork-upload-guide.md)
+
 ## 1. Fork 仓库
 
 原仓库：https://github.com/bucky1119/AI-Knowledge-Base.git
